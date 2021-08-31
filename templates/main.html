@@ -13,6 +13,7 @@ form {
 </style>
 
 <div class="jumbotron text-center">
+    <br>
     <h1>House Valuation Predictor</h1>
 </div>
 
@@ -20,7 +21,6 @@ form {
     <link rel="stylesheet" href="static/style.css">
 </head>
 <form action="{{ url_for('main') }}" method="POST">
-    <br>
     <br>
     <fieldset>
         <legend>Input values:</legend>
@@ -57,11 +57,11 @@ form {
         <br>
         <br>
         <input type="submit">
+        <br>
     </fieldset>
 </form>
 
 <div class="result" align="center">
-    <br>
     {% if result %}
         {% if original_input %}
             <b>Street name:</b> {{ original_input }}
