@@ -1,68 +1,111 @@
 <!doctype html>
 <html>
-<style>
-form {
-    margin: auto;
-    width: 35%;
-}
-.result {
-    margin: auto;
-    width: 35%;
-    border: 1px solid rgb(224, 203, 203);
-}
-</style>
-
-<div class="jumbotron text-center">
-    <h1>House Valuation Predictor</h1>
-</div>
 
 <head>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/dark.css">
 </head>
-<form action="{{ url_for('main') }}" method="POST">
-    <fieldset>
-        <legend>Input values:</legend>
-        Address:
-        <input name="address" type="text" required>
-        <br>
-        <br> Number of bedrooms:
-        <input name="bedroom" type="number" required>
-        <br>
-        <br> Square feet (area):
-        <input name="sqf" type="number" required>
-        <br>
-        <br> Style (Detached, Semi-detached, Terrace):
-        <input name="style" type="text" required>
-        <br>
-        <br> Age (Victorian, Georgian, etc):
-        <input name="age" type="text" required>
-        <br>
-        <br> Condition(1 to 5):
-        <input name="condition" type="number" required>
-        <br>
-        <br> Garden rating:
-        <input name="garden" type="number" required>
-        <br>
-        <br> Parking (yes or no):
-        <input name="parking" type="text" required>
-        <br>
-        <br> Number of bathrooms:
-        <input name="bathroom" type="number" required>
-        <br>
-        <br> Location rating:
-        <input name="location" type="number" required>
-        <br>
-        <input type="submit">
-    </fieldset>
-</form>
 
-<div class="result" align="center">
-    {% if result %}
-        {% if original_input %}
-            <b>Street name:</b> {{ original_input }}
-        {% endif %}
-           <p style="font-size:45px">{{ result }}</p>
-    {% endif %}
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>House Valuation Predictor</h3>
+                    <p>Fill in the data below.</p>
+                    <form class="requires-validation" novalidate>
+
+                        <div class="col-md-12">
+                           <input class="form-control" type="text" name="address" placeholder="Street Address" required>
+                           <div class="valid-feedback">Valid!</div>
+                           <div class="invalid-feedback">Field cannot be blank!</div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input class="form-control" type="text" name="bedroom" placeholder="Number of bedrooms" required>
+                             <div class="valid-feedback">Valid!</div>
+                             <div class="invalid-feedback">Field cannot be blank!</div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input class="form-control" type="number" name="sqf" placeholder="Square feet (area)" required>
+                             <div class="valid-feedback">Valid!</div>
+                             <div class="invalid-feedback">Field cannot be blank!</div>
+                        </div>
+
+                       <div class="col-md-12">
+                           <select class="form-select mt-3" required>
+                               <option selected disabled value="">Property Style</option>
+                               <option value="Detached">Detached</option>
+                               <option value="Semi-detached">Semi-detached</option>
+                               <option value="Terrace">Terrace</option>
+                           </select>
+                           <div class="valid-feedback">Valid!</div>
+                           <div class="invalid-feedback">Please select a style</div>
+                       </div>
+
+                       <div class="col-md-12">
+                           <select class="form-select mt-3" required>
+                               <option selected disabled value="">Age (Victorian, Georgian, etc)</option>
+                               <option value="Victorian">Victorian</option>
+                               <option value="Georgian">Georgian</option>
+                               <option value="1950">1950</option>
+                               <option value="1930">1930</option>
+                           </select>
+                           <div class="valid-feedback">Valid!</div>
+                           <div class="invalid-feedback">Please select an age</div>
+                       </div>
+
+                       <div class="col-md-12">
+                           <input class="form-control" type="number" name="condition" placeholder="Condition(1 to 5)"
+                               required>
+                           <div class="valid-feedback">Valid!</div>
+                           <div class="invalid-feedback">Field cannot be blank!</div>
+                       </div>
+
+                       <div class="col-md-12">
+                           <input class="form-control" type="number" name="garden" placeholder="Garden Size (1-3)"
+                               required>
+                           <div class="valid-feedback">Valid!</div>
+                           <div class="invalid-feedback">Field cannot be blank!</div>
+                       </div>
+
+
+                       <div class="col-md-12 mt-3">
+                           <label class="mb-3 mr-1" for="gender">Gender: </label>
+
+                           <input type="radio" class="btn-check" name="parking" id="yes" autocomplete="off" required>
+                           <label class="btn btn-sm btn-outline-secondary" for="yes">Yes</label>
+
+                           <input type="radio" class="btn-check" name="parking" id="no" autocomplete="off" required>
+                           <label class="btn btn-sm btn-outline-secondary" for="no">No</label>
+
+                           <div class="valid-feedback mv-up">Selection successful</div>
+                           <div class="invalid-feedback mv-up">Please select!</div>
+                       </div>
+
+                       <div class="col-md-12">
+                           <input class="form-control" type="number" name="bathroom" placeholder="Number of bathrooms"
+                               required>
+                           <div class="valid-feedback">Valid!</div>
+                           <div class="invalid-feedback">Field cannot be blank!</div>
+                       </div>
+
+                       <div class="col-md-12">
+                           <input class="form-control" type="number" name="location" placeholder="Location rating"
+                               required>
+                           <div class="valid-feedback">Valid!</div>
+                           <div class="invalid-feedback">Field cannot be blank!</div>
+                       </div>
+              
+
+                        <div class="form-button mt-3">
+                            <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </html>

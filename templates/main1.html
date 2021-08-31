@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<style>
+form {
+    margin: auto;
+    width: 35%;
+}
+.result {
+    margin: auto;
+    width: 35%;
+    border: 1px solid rgb(224, 203, 203);
+}
+</style>
+
+<div class="jumbotron text-center">
+    <h1>House Valuation Predictor</h1>
+</div>
+
+<head>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<form action="{{ url_for('main') }}" method="POST">
+    <fieldset>
+        <legend>Input values:</legend>
+        Address:
+        <input name="address" type="text" required>
+        <br>
+        <br> Number of bedrooms:
+        <input name="bedroom" type="number" required>
+        <br>
+        <br> Square feet (area):
+        <input name="sqf" type="number" required>
+        <br>
+        <br> Style (Detached, Semi-detached, Terrace):
+        <input name="style" type="text" required>
+        <br>
+        <br> Age (Victorian, Georgian, etc):
+        <input name="age" type="text" required>
+        <br>
+        <br> Condition(1 to 5):
+        <input name="condition" type="number" required>
+        <br>
+        <br> Garden rating:
+        <input name="garden" type="number" required>
+        <br>
+        <br> Parking (yes or no):
+        <input name="parking" type="text" required>
+        <br>
+        <br> Number of bathrooms:
+        <input name="bathroom" type="number" required>
+        <br>
+        <br> Location rating:
+        <input name="location" type="number" required>
+        <br>
+        <input type="submit">
+    </fieldset>
+</form>
+
+<div class="result" align="center">
+    {% if result %}
+        {% if original_input %}
+            <b>Street name:</b> {{ original_input }}
+        {% endif %}
+           <p style="font-size:45px">{{ result }}</p>
+    {% endif %}
+</div>
+
+</html>
