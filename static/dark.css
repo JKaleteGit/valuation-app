@@ -147,3 +147,12 @@ html, body {
 .valid-feedback{
    color: #2acc80;
 }
+
+.result p {
+    color: white;
+    font-size: 45px;
+}
+
+.result {
+    color: white;
+}
