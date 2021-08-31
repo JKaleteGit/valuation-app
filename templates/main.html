@@ -8,7 +8,7 @@ form {
 .result {
     margin: auto;
     width: 35%;
-    border: 1px solid rgb(203, 224, 203);
+    border: 3px solid rgb(34, 37, 34);
 }
 </style>
 
@@ -20,8 +20,11 @@ form {
     <link rel="stylesheet" href="static/style.css">
 </head>
 <form action="{{ url_for('main') }}" method="POST">
+    <br>
+    <br>
     <fieldset>
         <legend>Input values:</legend>
+        <br>
         Address:
         <input name="address" type="text" required>
         <br>
@@ -52,11 +55,13 @@ form {
         <br> Location rating:
         <input name="location" type="number" required>
         <br>
+        <br>
         <input type="submit">
     </fieldset>
 </form>
 
 <div class="result" align="center">
+    <br>
     {% if result %}
         {% if original_input %}
             <b>Street name:</b> {{ original_input }}
