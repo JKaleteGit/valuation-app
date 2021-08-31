@@ -7,6 +7,9 @@ from sklearn.ensemble import RandomForestRegressor
 
 app = flask.Flask(__name__, template_folder='templates')
 @app.route('/',  methods=['GET', 'POST'])
+
+
+
 def main():
     if flask.request.method == 'GET':
         return(flask.render_template('main.html'))
@@ -21,7 +24,7 @@ def main():
         parking = flask.request.form['parking']
         bathroom = flask.request.form['bathroom']
         location = flask.request.form['location']
-        arr = [[address, bedroom, sqf, style, age, condition, garden, parking, bathroom, location]]                    
+        arr = [[address, bedroom, sqf, style, condition, age, garden, parking, bathroom, location]]                    
                                        
         def get_data():
             df2 = pd.read_csv('/home/jmkalete/val_r.csv')
@@ -65,6 +68,7 @@ def main():
                 except:
                     print(i)
             df['Location ranking'] = lr
+            df['Property Address'] = rval
             xd = np.array(arr)
             xd.reshape(1,10)
             xd = pd.DataFrame(xd, columns=df.columns)
@@ -80,18 +84,10 @@ def main():
 
         def transform_data():
             df, y = sort_data(arr)
-            #mencode(columns=['Property Address']).fit_transform(df)
-            df['Property Address'] = df['Property Address'].astype('category')
-            df['Property Address'] = df['Property Address'].cat.codes
-            #encP = LabelEncoder()
-            encS = LabelEncoder()
-            encA = LabelEncoder()
-            encA.fit(df['Property era (Victorian, Georgian, 1950s,1930s,1960s or newer']) 
-            #encP.fit(df['Property Address'])
-            encS.fit(df['Property Style (terraced, semi-detached, detached)'])
-            df['Property era (Victorian, Georgian, 1950s,1930s,1960s or newer'] = encA.transform(df['Property era (Victorian, Georgian, 1950s,1930s,1960s or newer'])
-            #df['Property Address'] = encP.transform(df['Property Address'])
-            df['Property Style (terraced, semi-detached, detached)'] = encS.transform(df['Property Style (terraced, semi-detached, detached)'])
+            le = LabelEncoder()
+            categ = df[['Property Address', 'Property Style (terraced, semi-detached, detached)', 'Property era (Victorian, Georgian, 1950s,1930s,1960s or newer']]
+            categ = categ.apply(lambda col: le.fit_transform(col.astype(str)), axis=0, result_type='expand')
+            df[['Property Address', 'Property Style (terraced, semi-detached, detached)', 'Property era (Victorian, Georgian, 1950s,1930s,1960s or newer']] = categ[['Property Address', 'Property Style (terraced, semi-detached, detached)', 'Property era (Victorian, Georgian, 1950s,1930s,1960s or newer']]
 
             for i in range(len(df)):
                 if df['Parking (yes or no)'].iloc[i] == 'yes':
@@ -105,27 +101,11 @@ def main():
             x = df.iloc[1:,:].values
             return df, x, y 
 
-        model3 = RandomForestRegressor(n_estimators=150, max_features='auto')
+        model = RandomForestRegressor(n_estimators=150, max_features='auto')
 
         def fit(x,y, model):
             model = model.fit(x,y)
             return model
-
-
-        def compare_dist(x,y,model):
-            fit(x,y,model)
-            p = np.array(x)
-            #p.reshape(1,8)
-            pred = model.predict(p)
-            bdf = pd.DataFrame(pred, columns=['Prediction'])
-            Tbdf = pd.DataFrame(y, columns=['True'])
-            boxdf = bdf.join(Tbdf)
-
-            fig = plt.figure()
-            ax = plt.subplot()
-            boxdf.boxplot(column=['True', 'Prediction'], ax=ax)
-            ax.set(Title='House price True(left) vs Predicted(right)')
-            return plt.show()
 
         def predict(df, model):
             fit(x,y,model)
@@ -135,10 +115,8 @@ def main():
             pred = model.predict(p)
             return pred
         df, x, y = transform_data()
-        prediction = predict(df, model3)
-       
+        prediction = predict(df, model)
         return flask.render_template('main.html',
                                      original_input=str(address).title(),                                  
-                                     result='Price: £{}'.format(round(float(prediction), 2))
+                                     result='Price: £{}'.format(round(float(prediction), 2)),
                                      )
-    
