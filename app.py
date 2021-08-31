@@ -27,8 +27,10 @@ def main():
         arr = [[address, bedroom, sqf, style, condition, age, garden, parking, bathroom, location]]                    
                                        
         def get_data():
-            df2 = pd.read_csv('/home/jmkalete/val_r.csv')
-            df = pd.read_csv('/home/jmkalete/val.csv')
+            url_main = 'https://raw.githubusercontent.com/JKaleteGit/valuation-app/master/val.csv'
+            url_sub = 'https://raw.githubusercontent.com/JKaleteGit/valuation-app/master/val_r.csv'
+            df2 = pd.read_csv(url_sub)
+            df = pd.read_csv(url_main)
             df2 = df2.dropna()
 
             df = df.drop(25)
