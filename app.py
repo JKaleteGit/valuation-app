@@ -12,7 +12,7 @@ app = flask.Flask(__name__, template_folder='templates')
 
 def main():
     if flask.request.method == 'GET':
-        return(flask.render_template('main.html'))
+        return(flask.render_template('home.html'))
     if flask.request.method == 'POST':
         address = flask.request.form['address']
         bedroom = flask.request.form['bedroom']
