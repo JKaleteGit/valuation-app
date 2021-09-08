@@ -31,7 +31,7 @@ def main():
         p= predict(arr)
         df, x, y = p.transform_data(scale=True)
         xtrain, xtest, ytrain, ytest = train_test_split(x,y, test_size=0.1,random_state=25)
-        prediction = p.predict(xtrain,ytrain,df, model)
+        prediction = p.predict(x,y,df, model)
         return flask.render_template('main.html',
                                      original_input=str(address).title(),                                  
                                      result='Price: £{}'.format(round(float(prediction), 2)),
