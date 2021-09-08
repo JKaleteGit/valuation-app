@@ -26,31 +26,31 @@ form {
         <legend>Input values:</legend>
         <br>
         Street Name:
-        <input name="address" type="text" required>
+        <input name="address" type="text" value="{{ request.form['address'] }}" required>
         <br>
         <br> Number of bedrooms:
-        <input name="bedroom" type="number" required>
+        <input name="bedroom" type="number" value="{{ request.form['bedroom'] }}" required>
         <br>
         <br> Square feet (area):
-        <input name="sqf" type="number" required>
+        <input name="sqf" type="number" value="{{ request.form['sqf'] }}" required>
         <br>
         <br> Style (Detached, Semi-detached, Terrace):
-        <input name="style" type="text" required>
+        <input name="style" type="text" value="{{ request.form['style'] }}" required>
         <br>
         <br> Age (Victorian, Georgian, etc):
-        <input name="age" type="text" required>
+        <input name="age" type="text" value="{{ request.form['age'] }}" required>
         <br>
         <br> Condition(1 to 5):
-        <input name="condition" type="number" required>
+        <input name="condition" type="number" value="{{ request.form['condition'] }}" required>
         <br>
         <br> Garden Size (1 to 3):
-        <input name="garden" type="number" required>
+        <input name="garden" type="number" value="{{ request.form['garden'] }}" required>
         <br>
         <br> Parking (yes or no):
-        <input name="parking" type="text" required>
+        <input name="parking" type="text" value="{{ request.form['parking'] }}" required>
         <br>
         <br> Number of bathrooms:
-        <input name="bathroom" type="number" required>
+        <input name="bathroom" type="number" value="{{ request.form['bathroom'] }}" required>
         <br>
         <br>
         <input type="submit">
