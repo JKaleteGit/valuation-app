@@ -27,7 +27,7 @@ def main():
         bathroom = flask.request.form['bathroom']
         arr = [[address, bedroom, sqf, style, condition, age, garden, parking, bathroom]]                    
 
-        model = RandomForestRegressor(n_estimators=150, max_features='sqrt',min_samples_split=5,min_samples_leaf=1,max_depth=35)                               
+        model = RandomForestRegressor(n_estimators=200, max_features='sqrt',min_samples_split=2,min_samples_leaf=1,max_depth=50)                               
         p= predict(arr)
         df, x, y = p.transform_data(scale=True)
         xtrain, xtest, ytrain, ytest = train_test_split(x,y, test_size=0.1,random_state=25)
